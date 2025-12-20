@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<accessibility-service xmlns:android="http://schemas.android.com/apk/res/android"
+    android:accessibilityEventTypes="typeAllMask"
+    android:accessibilityFeedbackType="feedbackGeneric"
+    android:accessibilityFlags="flagDefault|flagRequestTouchExplorationMode|flagRequestEnhancedWebAccessibility"
+    android:canPerformGestures="true"
+    android:canRetrieveWindowContent="true"
+    android:description="@string/accessibility_service_description"
+    android:notificationTimeout="100"
+    android:packageNames="com.android.systemui"/>
+    
+<!-- Note: Create a strings.xml file in res/values/ with this content:
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Fishing Helper</string>
+    <string name="accessibility_service_description">Fishing Planet Helper - Auto fishing automation service. This service performs automated taps and gestures for Fishing Planet game.</string>
+</resources>
+-->
