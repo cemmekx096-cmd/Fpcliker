@@ -1,196 +1,261 @@
-# 🎣 Fishing Planet Helper - Setup Guide
+# 🚀 Fishing Planet Helper - GitHub Build Setup
 
-## 📁 Struktur Project untuk AIDE
+## 📁 Struktur Repository GitHub
 
 ```
 FishingPlanetHelper/
+├── .github/
+│   └── workflows/
+│       └── build.yml                    ← GitHub Actions
 ├── app/
-│   └── src/
-│       └── main/
-│           ├── java/com/fishinghelper/app/
-│           │   ├── MainActivity.java
-│           │   ├── AutoFishService.java
-│           │   └── CoordinateSetupActivity.java
-│           ├── res/
-│           │   ├── layout/
-│           │   │   ├── activity_main.xml
-│           │   │   └── activity_coordinate_setup.xml
-│           │   ├── values/
-│           │   │   └── strings.xml
-│           │   └── xml/
-│           │       └── accessibility_service_config.xml
-│           └── AndroidManifest.xml
+│   ├── src/
+│   │   └── main/
+│   │       ├── java/
+│   │       │   └── com/
+│   │       │       └── fishinghelper/
+│   │       │           └── app/
+│   │       │               ├── MainActivity.java
+│   │       │               ├── AutoFishService.java
+│   │       │               └── CoordinateSetupActivity.java
+│   │       ├── res/
+│   │       │   ├── layout/
+│   │       │   │   ├── activity_main.xml
+│   │       │   │   └── activity_coordinate_setup.xml
+│   │       │   ├── values/
+│   │       │   │   └── strings.xml
+│   │       │   └── xml/
+│   │       │       └── accessibility_service_config.xml
+│   │       └── AndroidManifest.xml
+│   ├── build.gradle                     ← App build config
+│   └── proguard-rules.pro
+├── gradle/
+│   └── wrapper/
+│       ├── gradle-wrapper.jar
+│       └── gradle-wrapper.properties
+├── build.gradle                         ← Root build config
+├── settings.gradle
+├── gradle.properties
+├── gradlew                              ← Linux/Mac
+├── gradlew.bat                          ← Windows
+├── .gitignore
 └── README.md
 ```
 
-## 🛠️ Setup di AIDE (HP Android)
+## 🛠️ Setup Step-by-Step
 
-### Step 1: Install AIDE
-1. Download **AIDE - Android IDE** dari Play Store
-2. Install dan buka aplikasi
+### Step 1: Buat Repository di GitHub
 
-### Step 2: Buat Project Baru
-1. Buka AIDE
-2. Pilih "New Project" → "App with Empty Activity"
-3. Nama project: **FishingPlanetHelper**
-4. Package name: **com.fishinghelper.app**
+1. Buka [github.com](https://github.com)
+2. Login ke akun Anda
+3. Klik tombol **"New Repository"** (hijau)
+4. Isi form:
+   - **Repository name**: `FishingPlanetHelper`
+   - **Description**: `Auto fishing helper for Fishing Planet game`
+   - **Visibility**: Public atau Private (terserah)
+   - **✓ Add README** (centang)
+   - ❌ Jangan pilih template `.gitignore` atau license dulu
+5. Klik **"Create repository"**
 
-### Step 3: Copy Semua File
-1. Buat file **strings.xml** di `res/values/`:
+### Step 2: Clone Repository ke PC/Laptop
+
+Pakai PC/Laptop teman atau warnet:
+
+```bash
+# Clone repository
+git clone https://github.com/USERNAME/FishingPlanetHelper.git
+cd FishingPlanetHelper
+```
+
+Atau bisa langsung upload via web (lebih mudah):
+- Klik **"Add file"** → **"Create new file"** di GitHub
+
+### Step 3: Upload Semua File
+
+#### Via Web GitHub (Paling Mudah):
+
+1. **Buat folder structure** dengan klik "Add file" → "Create new file"
+   - Untuk buat folder, ketik: `app/src/main/java/com/fishinghelper/app/MainActivity.java`
+   - GitHub otomatis buat semua folder
+   
+2. **Copy-paste code** dari artifacts saya ke file yang sesuai
+
+3. **Ulangi** untuk semua file
+
+#### Via Git (Kalau ada PC):
+
+```bash
+# Buat struktur folder
+mkdir -p app/src/main/java/com/fishinghelper/app
+mkdir -p app/src/main/res/layout
+mkdir -p app/src/main/res/values
+mkdir -p app/src/main/res/xml
+mkdir -p .github/workflows
+
+# Copy semua file dari artifacts ke folder yang sesuai
+# Lalu commit
+git add .
+git commit -m "Initial commit - Fishing Helper v1.0"
+git push origin main
+```
+
+### Step 4: Setup Gradle Wrapper
+
+Kalau pakai PC, download Gradle wrapper:
+
+```bash
+# Di root folder project
+gradle wrapper --gradle-version 8.0
+```
+
+Atau download manual dari: [Gradle Releases](https://services.gradle.io/distributions/)
+
+**File yang dibutuhkan:**
+- `gradlew` (Linux/Mac executable)
+- `gradlew.bat` (Windows executable)  
+- `gradle/wrapper/gradle-wrapper.jar`
+- `gradle/wrapper/gradle-wrapper.properties`
+
+**Isi `gradle-wrapper.properties`:**
+```properties
+distributionBase=GRADLE_USER_HOME
+distributionPath=wrapper/dists
+distributionUrl=https\://services.gradle.io/distributions/gradle-8.0-bin.zip
+zipStoreBase=GRADLE_USER_HOME
+zipStorePath=wrapper/dists
+```
+
+### Step 5: Buat File strings.xml
+
+Di `app/src/main/res/values/strings.xml`:
+
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Fishing Helper</string>
-    <string name="accessibility_service_description">Fishing Planet Helper - Auto fishing automation service</string>
+    <string name="accessibility_service_description">Fishing Planet Helper - Auto fishing automation service. This service performs automated taps and gestures for Fishing Planet game.</string>
 </resources>
 ```
 
-2. Buat folder **xml** di `res/` (jika belum ada)
-3. Copy semua file dari artifacts ke lokasi yang sesuai
+### Step 6: Commit & Push
 
-### Step 4: Build APK
-1. Di AIDE, pilih menu → "Build & Run"
-2. Tunggu proses compile selesai
-3. APK akan terinstall otomatis
+```bash
+git add .
+git commit -m "Complete fishing helper app"
+git push origin main
+```
 
-## 📱 Cara Menggunakan Aplikasi
+### Step 7: GitHub Actions Build
 
-### Pertama Kali Setup:
+1. Pergi ke repository di GitHub
+2. Klik tab **"Actions"**
+3. GitHub Actions akan **otomatis detect** workflow `build.yml`
+4. Klik **"I understand my workflows, go ahead and enable them"**
+5. Push atau manual trigger:
+   - Klik workflow "Build APK"
+   - Klik **"Run workflow"** → **"Run workflow"**
+6. Tunggu build selesai (3-5 menit)
+7. Download APK:
+   - Klik workflow yang selesai
+   - Scroll ke bawah ke bagian **"Artifacts"**
+   - Download **"fishing-helper-debug"**
+   - Extract ZIP → dapat APK!
 
-#### 1. Enable Permissions
-- Buka aplikasi
-- Akan muncul request permission:
-  - **Overlay Permission** ✓
-  - **Accessibility Service** ✓
-- Enable semua permission
+## 📱 Install APK ke HP
 
-#### 2. Setup Koordinat
-1. Buka **Fishing Planet** game
-2. Masuk ke area fishing
-3. Minimize game (jangan tutup!)
-4. Buka **Fishing Helper** app
-5. Tap "**Setup Coordinates**"
-6. Ikuti instruksi:
-   - Tap tombol **REEL MANUAL** (Kuning) di game
-   - Tap tombol **REEL AUTO** (Hijau) di game
-   - Tap tombol **ROD JERK** (Biru) di game
-7. Tekan "**DONE**"
+1. Transfer APK ke HP
+2. Install (enable "Install from unknown sources" jika diminta)
+3. Buka app
+4. Setup koordinat
+5. Enjoy fishing! 🎣
 
-✅ Koordinat tersimpan! Setup hanya dilakukan 1x.
+## 🔧 Troubleshooting
 
-### Menggunakan Automation:
+### Build Failed di GitHub Actions?
 
-#### Mode 1: Stop & Go
-**Untuk**: Teknik Stop & Go retrieval
-- **Settings**:
-  - Hold: 1-5 detik (berapa lama reel)
-  - Pause: 0.5-3 detik (berapa lama berhenti)
-- **Fungsi**: Otomatis tap & hold reel → lepas → repeat
+**Error: Gradle wrapper not found**
+- Upload file `gradlew`, `gradlew.bat`, dan folder `gradle/wrapper/`
 
-#### Mode 2A: Auto Reel + Jerk
-**Untuk**: Teknik dengan rod jerking
-- **Settings**:
-  - Jerk Interval: 0.5-3 detik
-- **Fungsi**: Activate auto reel 1x → jerk rod berulang
+**Error: SDK not found**
+- Sudah otomatis di-handle GitHub Actions
+- Pastikan file `build.gradle` sudah benar
 
-#### Mode 2B: Manual Reel + Jerk
-**Untuk**: Kombinasi manual reel & jerking
-- **Settings**:
-  - Hold: berapa lama reel
-  - Pause: jeda sebelum jerk
-- **Fungsi**: Reel → lepas → jerk → repeat
+**Error: Permission denied**
+- File `gradlew` tidak executable
+- Fix: Di PC, run `chmod +x gradlew` lalu push lagi
 
-### Anti-Detection Settings:
+### Tidak Punya PC?
 
-**Random Coordinate**: ±5-20px
-- Membuat tap tidak selalu di titik yang sama
-- Rekomendasi: 10-15px
+**Opsi 1: Pakai GitHub Web Interface**
+- Buat semua file manual via web
+- Upload satu-satu
+- Lebih lama tapi tetap work
 
-**Timing Variance**: ±5-30%
-- Membuat durasi hold/pause bervariasi
-- Rekomendasi: 15-20%
+**Opsi 2: Pakai Android GitHub Client**
+- Install app "GitTouch" atau "FastHub" dari Play Store
+- Login ke GitHub
+- Bisa edit file dari HP
 
-### Cara Pakai:
-1. Setup koordinat (1x saja)
-2. Pilih mode sesuai teknik fishing
-3. Atur timing sesuai keinginan
-4. Buka game Fishing Planet
-5. Cast umpan seperti biasa
-6. Kembali ke Fishing Helper
-7. Tekan "**START**"
-8. Minimize app
-9. Bot akan bekerja otomatis!
-10. Tekan "**STOP**" untuk berhenti
+**Opsi 3: Pakai Online IDE**
+- [GitHub Codespaces](https://github.com/features/codespaces) (gratis limited)
+- [Gitpod](https://gitpod.io) (gratis 50 hours/month)
+- Buka repository Anda di browser
+- Edit langsung di cloud
 
-## ⚙️ Tips & Tricks
+## 📋 Checklist Lengkap
 
-### Untuk Hasil Optimal:
-- **Koordinat akurat**: Tap tepat di tengah button
-- **Timing adjustment**: Test di game, sesuaikan duration
-- **Anti-detection ON**: Aktifkan randomization
-- **Jangan 24/7**: Main 30-60 menit, istirahat 5-10 menit
+Pastikan semua file ini ada di repository:
 
-### Troubleshooting:
+```
+✅ .github/workflows/build.yml
+✅ app/build.gradle
+✅ app/src/main/AndroidManifest.xml
+✅ app/src/main/java/com/fishinghelper/app/MainActivity.java
+✅ app/src/main/java/com/fishinghelper/app/AutoFishService.java
+✅ app/src/main/java/com/fishinghelper/app/CoordinateSetupActivity.java
+✅ app/src/main/res/layout/activity_main.xml
+✅ app/src/main/res/layout/activity_coordinate_setup.xml
+✅ app/src/main/res/values/strings.xml
+✅ app/src/main/res/xml/accessibility_service_config.xml
+✅ build.gradle (root)
+✅ settings.gradle
+✅ gradle.properties
+✅ gradle/wrapper/gradle-wrapper.properties
+✅ gradle/wrapper/gradle-wrapper.jar
+✅ gradlew
+✅ gradlew.bat
+✅ .gitignore
+✅ README.md
+```
 
-**Bot tidak jalan?**
-- ✓ Pastikan Accessibility Service enabled
-- ✓ Pastikan Overlay Permission enabled
-- ✓ Koordinat sudah di-setup
-- ✓ Game tidak di fullscreen mode (biar ada space untuk kontrol)
+## 🎯 Quick Start (Tanpa PC)
 
-**Tap meleset?**
-- Setup ulang koordinat dengan lebih akurat
-- Kurangi random range di settings
+Kalau benar-benar tidak ada akses PC sama sekali:
 
-**Timing tidak pas?**
-- Sesuaikan slider Hold/Pause/Jerk
-- Test beberapa kali untuk timing terbaik
+1. Buat repo di GitHub via HP browser
+2. Upload file satu-satu via "Add file" button
+3. Copy-paste code dari artifacts
+4. Enable GitHub Actions
+5. Manual trigger build
+6. Download APK dari Artifacts
+7. Done!
 
-## 🔒 Safety & Legal
+**Estimasi waktu**: 30-60 menit (upload manual)
 
-**DISCLAIMER**: 
-- Aplikasi ini untuk **edukasi** dan **personal use**
-- Gunakan dengan **risiko sendiri**
-- Beberapa game **melarang** penggunaan bot
-- Bisa kena **ban** dari game
+## 💡 Tips
 
-**Safety Tips**:
-- Jangan gunakan 24/7
-- Gunakan randomization maksimal
-- Variasikan waktu bermain
-- Jangan terlalu "perfect"
+- Simpan URL repository: `https://github.com/USERNAME/FishingPlanetHelper`
+- Setiap kali ada perubahan code, push ke GitHub → auto rebuild
+- APK hasil build ada di tab **Actions** → **Artifacts**
+- Build history tersimpan, bisa download versi lama
 
-## 📝 Notes untuk Development
+## 🚀 Next Steps
 
-### Jika ingin modifikasi:
-- Edit timing di **AutoFishService.java**
-- Tambah mode baru di **MainActivity.java**
-- Kustomisasi UI di **activity_main.xml**
-
-### Untuk MODE 3 (Smart Fighting) - Coming Soon:
-- Butuh screen capture & color detection
-- Butuh library tambahan (OpenCV/TensorFlow)
-- Lebih kompleks, perlu PC untuk development
-
-## 🎯 Future Features
-
-- [ ] Mode 3: Smart Fighting (auto tension management)
-- [ ] Rod Stand detection
-- [ ] Pattern recording (record & replay)
-- [ ] Multiple preset profiles
-- [ ] Statistics tracking
-- [ ] Cloud sync settings
-
-## 📞 Support
-
-Jika ada bug atau pertanyaan:
-- Test ulang setup koordinat
-- Cek permission sudah enabled semua
-- Restart app dan game
-- Setup ulang dari awal jika perlu
+Setelah APK berhasil di-build:
+1. Install ke HP
+2. Test semua mode
+3. Adjust timing sesuai game
+4. Share hasilnya! 🎣
 
 ---
 
-**Happy Fishing! 🎣**
-
-*Version 1.0 - Basic Automation*
+**Good luck!** Kalau ada error saat setup, tanya aja! 😊
