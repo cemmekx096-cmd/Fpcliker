@@ -40,45 +40,61 @@ public class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
         
-        prefs = getSharedPreferences("FishingHelper", MODE_PRIVATE);
-        
-        initViews();
-        loadSettings();
-        setupListeners();
-        checkAccessibilityPermission();
+        try {
+            setContentView(R.layout.activity_main);
+            
+            prefs = getSharedPreferences("FishingHelper", MODE_PRIVATE);
+            
+            initViews();
+            loadSettings();
+            setupListeners();
+            checkAccessibilityPermission();
+        } catch (Exception e) {
+            e.printStackTrace();
+            Toast.makeText(this, "Error: " + e.getMessage(), Toast.LENGTH_LONG).show();
+        }
     }
     
     private void initViews() {
-        // Coordinate displays
-        tvReelManual = findViewById(R.id.tvReelManual);
-        tvReelAuto = findViewById(R.id.tvReelAuto);
-        tvRodJerk = findViewById(R.id.tvRodJerk);
-        
-        // Buttons
-        btnSetupCoords = findViewById(R.id.btnSetupCoords);
-        btnStart = findViewById(R.id.btnStart);
-        btnStop = findViewById(R.id.btnStop);
-        
-        // Mode selection
-        rgMode = findViewById(R.id.rgMode);
-        
-        // Timing sliders
-        sbHoldDuration = findViewById(R.id.sbHoldDuration);
-        sbPauseDuration = findViewById(R.id.sbPauseDuration);
-        sbJerkInterval = findViewById(R.id.sbJerkInterval);
-        tvHold = findViewById(R.id.tvHold);
-        tvPause = findViewById(R.id.tvPause);
-        tvJerk = findViewById(R.id.tvJerk);
-        
-        // Anti-detection sliders
-        sbRandomRange = findViewById(R.id.sbRandomRange);
-        sbTimingVariance = findViewById(R.id.sbTimingVariance);
-        tvRandom = findViewById(R.id.tvRandom);
-        tvVariance = findViewById(R.id.tvVariance);
-        
-        btnStop.setEnabled(false);
+        try {
+            // Coordinate displays
+            tvReelManual = findViewById(R.id.tvReelManual);
+            tvReelAuto = findViewById(R.id.tvReelAuto);
+            tvRodJerk = findViewById(R.id.tvRodJerk);
+            
+            // Buttons
+            btnSetupCoords = findViewById(R.id.btnSetupCoords);
+            btnStart = findViewById(R.id.btnStart);
+            btnStop = findViewById(R.id.btnStop);
+            
+            // Mode selection
+            rgMode = findViewById(R.id.rgMode);
+            
+            // Timing sliders
+            sbHoldDuration = findViewById(R.id.sbHoldDuration);
+            sbPauseDuration = findViewById(R.id.sbPauseDuration);
+            sbJerkInterval = findViewById(R.id.sbJerkInterval);
+            tvHold = findViewById(R.id.tvHold);
+            tvPause = findViewById(R.id.tvPause);
+            tvJerk = findViewById(R.id.tvJerk);
+            
+            // Anti-detection sliders
+            sbRandomRange = findViewById(R.id.sbRandomRange);
+            sbTimingVariance = findViewById(R.id.sbTimingVariance);
+            tvRandom = findViewById(R.id.tvRandom);
+            tvVariance = findViewById(R.id.tvVariance);
+            
+            if (btnStop != null) btnStop.setEnabled(false);
+            
+            // Check for null views
+            if (tvReelManual == null || btnSetupCoords == null || btnStart == null) {
+                throw new RuntimeException("Layout inflation failed - views are null");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            Toast.makeText(this, "Failed to initialize views: " + e.getMessage(), Toast.LENGTH_LONG).show();
+        }
     }
     
     private void loadSettings() {
@@ -311,4 +327,4 @@ public class MainActivity extends Activity {
         }
         return false;
     }
-          }
+            }
