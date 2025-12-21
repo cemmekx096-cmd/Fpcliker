@@ -29,9 +29,9 @@ public class CoordinateSetupActivity extends Activity {
     private int rodJerkX = -1, rodJerkY = -1;
     
     private String[] instructions = {
-        "Tap on REEL MANUAL button (Yellow)",
-        "Tap on REEL AUTO button (Green)",
-        "Tap on ROD JERK button (Blue)"
+        "Step 1/3: Tap REEL MANUAL button (Yellow circle, left)",
+        "Step 2/3: Tap REEL AUTO button (Green circle, left bottom)",
+        "Step 3/3: Tap ROD JERK button (Blue circle, right)"
     };
     
     @Override
@@ -54,6 +54,12 @@ public class CoordinateSetupActivity extends Activity {
         });
         
         setupOverlay();
+        
+        // Auto-minimize setelah 2 detik
+        tvInstruction.postDelayed(() -> {
+            moveTaskToBack(true);
+            Toast.makeText(this, "Buka game Fishing Planet untuk setup koordinat", Toast.LENGTH_LONG).show();
+        }, 2000);
     }
     
     private void setupOverlay() {
@@ -84,6 +90,8 @@ public class CoordinateSetupActivity extends Activity {
     }
     
     private void handleCoordinateTap(int x, int y) {
+        if (currentStep > 2) return; // Prevent extra taps after completion
+        
         switch (currentStep) {
             case 0:
                 reelManualX = x;
@@ -91,7 +99,7 @@ public class CoordinateSetupActivity extends Activity {
                 overlayView.addMarker(x, y, "Reel Manual", Color.YELLOW);
                 currentStep++;
                 tvInstruction.setText(instructions[1]);
-                Toast.makeText(this, "Reel Manual set!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "✓ Reel Manual set! Tap Reel Auto next", Toast.LENGTH_SHORT).show();
                 break;
             case 1:
                 reelAutoX = x;
@@ -99,15 +107,20 @@ public class CoordinateSetupActivity extends Activity {
                 overlayView.addMarker(x, y, "Reel Auto", Color.GREEN);
                 currentStep++;
                 tvInstruction.setText(instructions[2]);
-                Toast.makeText(this, "Reel Auto set!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "✓ Reel Auto set! Tap Rod Jerk next", Toast.LENGTH_SHORT).show();
                 break;
             case 2:
                 rodJerkX = x;
                 rodJerkY = y;
                 overlayView.addMarker(x, y, "Rod Jerk", Color.CYAN);
+                currentStep++;
                 btnDone.setEnabled(true);
                 tvInstruction.setText("All coordinates set! Press DONE");
-                Toast.makeText(this, "Rod Jerk set!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "✓ All set! Press DONE button", Toast.LENGTH_LONG).show();
+                
+                // Disable overlay setelah semua setup
+                overlayView.setOnTouchListener(null);
+                overlayView.setClickable(false);
                 break;
         }
     }
