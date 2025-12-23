@@ -1,272 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#1a1a1a"
-    android:padding="16dp">
+    android:orientation="vertical"
+    android:padding="30dp"
+    android:gravity="center">
 
-    <LinearLayout
+    <!-- Icon/Logo -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="🎣"
+        android:textSize="80sp"
+        android:layout_marginBottom="20dp"/>
+
+    <!-- Title -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Fishing Planet Helper"
+        android:textSize="28sp"
+        android:textColor="#4CAF50"
+        android:gravity="center"
+        android:layout_marginBottom="40dp"/>
+
+    <!-- Status Display -->
+    <TextView
+        android:id="@+id/tvStatus"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:text="🟢 Overlay Active\n\nYou can minimize this app.\nOverlay will stay visible in game.\n\nTap floating icon to access menu."
+        android:textSize="16sp"
+        android:textColor="#FFFFFF"
+        android:gravity="center"
+        android:padding="20dp"
+        android:background="#2a2a2a"
+        android:layout_marginBottom="40dp"/>
 
-        <!-- Header -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="🎣 Fishing Planet Helper"
-            android:textSize="24sp"
-            android:textColor="#4CAF50"
-            android:textStyle="bold"
-            android:gravity="center"
-            android:layout_marginBottom="20dp"/>
+    <!-- Stop Button -->
+    <Button
+        android:id="@+id/btnStop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="⏹️  STOP &amp; EXIT"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:padding="20dp"
+        android:background="#F44336"/>
 
-        <!-- Coordinates Section -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Coordinates Setup"
-            android:textSize="18sp"
-            android:textColor="#FFF"
-            android:textStyle="bold"
-            android:layout_marginBottom="10dp"/>
-
-        <Button
-            android:id="@+id/btnSetupCoords"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Setup Coordinates"
-            android:backgroundTint="#2196F3"
-            android:textColor="#FFF"
-            android:layout_marginBottom="10dp"/>
-
-        <TextView
-            android:id="@+id/tvReelManual"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="✗ Reel Manual: Not Set"
-            android:textSize="14sp"
-            android:textColor="#FFA726"
-            android:padding="8dp"
-            android:background="#2a2a2a"
-            android:layout_marginBottom="5dp"/>
-
-        <TextView
-            android:id="@+id/tvReelAuto"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="✗ Reel Auto: Not Set"
-            android:textSize="14sp"
-            android:textColor="#66BB6A"
-            android:padding="8dp"
-            android:background="#2a2a2a"
-            android:layout_marginBottom="5dp"/>
-
-        <TextView
-            android:id="@+id/tvRodJerk"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="✗ Rod Jerk: Not Set"
-            android:textSize="14sp"
-            android:textColor="#42A5F5"
-            android:padding="8dp"
-            android:background="#2a2a2a"
-            android:layout_marginBottom="20dp"/>
-
-        <!-- Mode Selection -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Select Mode"
-            android:textSize="18sp"
-            android:textColor="#FFF"
-            android:textStyle="bold"
-            android:layout_marginBottom="10dp"/>
-
-        <RadioGroup
-            android:id="@+id/rgMode"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#2a2a2a"
-            android:padding="10dp"
-            android:layout_marginBottom="20dp">
-
-            <RadioButton
-                android:id="@+id/rbMode1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Mode 1: Stop &amp; Go"
-                android:textColor="#FFF"
-                android:checked="true"/>
-
-            <RadioButton
-                android:id="@+id/rbMode2A"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Mode 2A: Auto Reel + Jerk"
-                android:textColor="#FFF"/>
-
-            <RadioButton
-                android:id="@+id/rbMode2B"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Mode 2B: Manual Reel + Jerk"
-                android:textColor="#FFF"/>
-        </RadioGroup>
-
-        <!-- Timing Settings -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="⚙️ Timing Settings"
-            android:textSize="18sp"
-            android:textColor="#FFF"
-            android:textStyle="bold"
-            android:layout_marginBottom="10dp"/>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:background="#2a2a2a"
-            android:padding="15dp"
-            android:layout_marginBottom="20dp">
-
-            <TextView
-                android:id="@+id/tvHold"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Hold: 2.5s"
-                android:textColor="#FFF"
-                android:textSize="14sp"/>
-
-            <SeekBar
-                android:id="@+id/sbHoldDuration"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:max="40"
-                android:progress="15"
-                android:layout_marginBottom="15dp"/>
-
-            <TextView
-                android:id="@+id/tvPause"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Pause: 1.0s"
-                android:textColor="#FFF"
-                android:textSize="14sp"/>
-
-            <SeekBar
-                android:id="@+id/sbPauseDuration"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:max="25"
-                android:progress="5"
-                android:layout_marginBottom="15dp"/>
-
-            <TextView
-                android:id="@+id/tvJerk"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Jerk Interval: 1.5s"
-                android:textColor="#FFF"
-                android:textSize="14sp"/>
-
-            <SeekBar
-                android:id="@+id/sbJerkInterval"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:max="25"
-                android:progress="10"/>
-        </LinearLayout>
-
-        <!-- Anti-Detection Settings -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="🔒 Anti-Detection"
-            android:textSize="18sp"
-            android:textColor="#FFF"
-            android:textStyle="bold"
-            android:layout_marginBottom="10dp"/>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:background="#2a2a2a"
-            android:padding="15dp"
-            android:layout_marginBottom="20dp">
-
-            <TextView
-                android:id="@+id/tvRandom"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Random: ±10px"
-                android:textColor="#FFF"
-                android:textSize="14sp"/>
-
-            <SeekBar
-                android:id="@+id/sbRandomRange"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:max="15"
-                android:progress="5"
-                android:layout_marginBottom="15dp"/>
-
-            <TextView
-                android:id="@+id/tvVariance"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Variance: ±15%"
-                android:textColor="#FFF"
-                android:textSize="14sp"/>
-
-            <SeekBar
-                android:id="@+id/sbTimingVariance"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:max="25"
-                android:progress="10"/>
-        </LinearLayout>
-
-        <!-- Control Buttons -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center">
-
-            <Button
-                android:id="@+id/btnStart"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="START"
-                android:backgroundTint="#4CAF50"
-                android:textColor="#FFF"
-                android:textStyle="bold"
-                android:layout_marginEnd="10dp"/>
-
-            <Button
-                android:id="@+id/btnStop"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="STOP"
-                android:backgroundTint="#F44336"
-                android:textColor="#FFF"
-                android:textStyle="bold"/>
-        </LinearLayout>
-
-        <!-- Info -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="ℹ️ Make sure Accessibility Service is enabled"
-            android:textSize="12sp"
-            android:textColor="#999"
-            android:gravity="center"
-            android:layout_marginTop="20dp"/>
-    </LinearLayout>
-</ScrollView>
+    <!-- Info -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="ℹ️ Pressing STOP will exit the app and remove overlay"
+        android:textSize="12sp"
+        android:textColor="#999999"
+        android:gravity="center"
+        android:layout_marginTop="20dp"/>
+</LinearLayout>

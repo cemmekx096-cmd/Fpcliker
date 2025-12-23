@@ -27,6 +27,11 @@
             android:exported="false"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
 
+        <!-- Overlay Service -->
+        <service
+            android:name=".OverlayService"
+            android:exported="false"/>
+
         <!-- Accessibility Service -->
         <service
             android:name=".AutoFishService"
